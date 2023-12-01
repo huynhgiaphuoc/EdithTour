@@ -1,0 +1,35 @@
+﻿@model List<EdithTour.Models.Tour_Inside>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        @*@foreach (var item in Model)
+        {
+        <div class="col-sm-6 col-md-4 col-lg-3" style="border: 1px;">
+            <p>@item.Image</p>
+            <p>@item.Name</p>
+
+
+        </div>
+
+        }*@
+        @foreach (var item in Model)
+        {
+        <div class="col-sm-6 col-md-4 col-lg-3" style="border: 1px;">
+            <img src="@item.Image" style="width: 100px; height: 100px"/>
+            <p>@item.Name</p>
+            <a href="/ShoppingCart/AddtoCart/@item.ID_tour_inside" class="btn btn-primary">Buy</a>
+
+        </div>
+
+        }
+
+
+    </div>
+   
+</div>
+

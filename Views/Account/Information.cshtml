@@ -1,0 +1,129 @@
+﻿@{
+    ViewBag.Title = "Information";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="parallax-intro">
+                <p class="titlecontent">Information</p>
+                <p class="under-border"></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container light-style flex-grow-1 container-p-y">
+    <h4 class="font-weight-bold py-3 mb-4">
+        Account settings
+    </h4>
+        <div class="card overflow-hidden mb-5">
+            <div class="row no-gutters row-bordered row-border-light ">
+                <div class="col-md-3 pt-0">
+                    <div class="list-group list-group-flush account-settings-links">
+                        <a class="list-group-item list-group-item-action active" data-toggle="list"
+                           href="" id="btnGeneral">General</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list"
+                           href="" id="btnChange">Change password</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list"
+                           href="#account-social-links">My Purchase</a>
+                        <a class="list-group-item list-group-item-action"
+                           href="@Url.Action("Logout","Account")">Log Out</a>
+                    </div>
+                </div>
+
+                <div class="col-md-9 ">
+                    <div class="tab-content">
+                        <div class="tab-pane fade active show" id="account-general">
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<script>
+
+    $(document).ready(function () {
+        $("#account-general").load('/Account/General');
+    })
+
+        //ajax load change password
+    $('#btnChange').click(function () {
+        $("#account-general").load('/Account/ChangePassword');
+    });
+
+    $('#btnGeneral').click(function () {
+        $("#account-general").load('/Account/General');
+    });
+
+            //Function changer Avt
+            function chooseFile(fileInput) {
+                if (fileInput.files && fileInput.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#image').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(fileInput.files[0]);
+                }
+    }
+
+    //ajax reload general
+     @*$('#btnGeneral').click(function () {
+        $.ajax({
+            url: '/Account/Information',
+            type: 'get',
+            success: function () {
+                $('#account-general').empty();
+                $(function () {
+                    let data = '<div class="card-body media align-items-center">';
+                    data += '<form action="/Account/Information" method="post" enctype="multipart/form-data">'
+                    data += '<img src="@Session["Avatar"]" alt="" class="d-block">';
+                    data += '<div class="media-body ml-4">';
+                    data += '<label class="btn btn-primary">Upload new photo';
+                    data += '<input type="file" class="account-settings-fileinput">';
+                    data += '</label> &nbsp;';
+                    data += '<input type="reset" class="btn btn-warning md-btn-flat" value="Reset">';
+                    data += '<div class="text-light small mt-1">Allowed JPG, GIF, JPEG or PNG. Max size of 800K</div>';
+                    data += '</div>';
+                    data += '</div>';
+                    data += '<hr class="border-light m-0">';
+                    data += '<div class="card-body">';
+                    data += '<div class="form-group">';
+                    data += '<label class="form-label">Username</label>';
+                    data += '<input type="text" class="form-control mb-1" readonly value="@Session["Username"]">';
+                    data += '</div>';
+                    data += '<div class="form-group">';
+                    data += '<label class="form-label">Name</label>';
+                    data += '<input type="text" class="form-control" value="@Session["Name"]">';
+                    data += '</div>';
+                    data += '<div class="form-group">';
+                    data += '<label class="form-label">E-mail</label>';
+                    data += '<input type="text" class="form-control mb-1" value="@Session["Email"]">';
+                    data += '</div>';
+                    data += '<div class="form-group">';
+                    data += '<label class="form-label">Phone</label>';
+                    data += '<input type="text" class="form-control" value="@Session["Phone"]">';
+                    data += '</div>';
+                    data += '<div class="form-group">';
+                    data += '<label class="form-label">Brithday</label>';
+                    data += '<input type="date" class="form-control" value="@Session["Birthday"]">';
+                    data += '</div>';
+                    data += '<div class="form-group">';
+                    data += '<label class="form-label">Address</label>';
+                    data += '<input type="text" class="form-control" value="@Session["Address"]">';
+                    data += '</div>';
+                    data += '<div class="form-group mt-2">';
+                    data += '<input type="submit" class="btn btn-warning" name="submit" value="Save" />';
+                    data += '</div>';
+                    data += '</form>'
+                    data += '</div>';
+                    $('#account-general').append(data);
+                });
+            }
+        })
+    });*@
+</script>
+

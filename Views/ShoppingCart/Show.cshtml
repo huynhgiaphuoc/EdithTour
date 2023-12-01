@@ -1,0 +1,80 @@
+﻿@model EdithTour.Models.Cart
+
+@{
+    ViewBag.Title = "Show";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+
+@if (Model != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Ticket</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th></th>
+                <th>To</th>
+
+
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                decimal total = Convert.ToDecimal(item.quanlity * item.inside.Price);
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => item.inside.Name);
+                    </td>
+                    <td>
+                        <img src="@Url.Content(item.inside.Image)" style="width: 100px;height: 100px;" />
+
+                    </td>
+                    <td>
+                        <select class="form-control">
+                            @foreach (var tic in Model.select_cart())
+                            {
+                                <option name="Name_Ticket">@tic.Name</option>
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.inside.Price)
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("Update_Quantity_Cart", "ShoppingCart"))
+                        {
+                            <input type="hidden" value="@item.inside.ID_tour_inside" name="ID_tour_inside" class="btn btn-primary" />
+                            <input type="number" value="@item.quanlity" name="Quantity" class="form-control" style="width: 100px" />
+                        <td>
+                            <input type="submit" value="Update" class="btn btn-primary" />
+                        </td>
+
+                    }
+                        </td>
+                <td>
+                    @total
+
+                </td>
+                    </tr>
+               
+                }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5" style="text-align: right"> Total: @Model.Total_money()</td>
+               
+            </tr>
+          
+           
+         
+
+
+        </tfoot>
+            </table>
+            <a href="@Url.Action("Index", "ShoppingCart")">back</a>
+        }
